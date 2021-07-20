@@ -1,5 +1,5 @@
 exports.createPages = async ({ graphql, actions }) => {
-    
+    const {createPage} = actions
     const query = await graphql(`
     {
        allShopifyProduct {
@@ -33,5 +33,12 @@ exports.createPages = async ({ graphql, actions }) => {
      }
    `)
 
-   console.log(query)
+   console.log(JSON.stringify(query))
+     query.data.allShopifyProduct.edges.forEach(({node}) => {
+    createPage({
+        path: node.shopifyId,
+        component: require.resolve("./src/templates/product.jsx"),
+        context: node
+    })
+})
 }
