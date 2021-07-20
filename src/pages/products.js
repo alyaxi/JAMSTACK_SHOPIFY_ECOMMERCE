@@ -9,16 +9,16 @@ const Products = ({data}) =>  {
         <div>
             <h2>My Products</h2>
             {data.allShopifyProduct.edges.map(({node : product}) => (
-               <Link to={`/${product.shopifyId}`}>
+              
                 <div key={product.shopifyId}>
                     <img src={product.images[0].originalSrc} alt="" />
-                    <h3>{product.title}</h3>
+                    <Link to={`/${product.shopifyId}`}><h3>{product.title}</h3></Link> 
                     <p>{product.description}</p>
                     <p>
                     <b>Price :</b> {product.priceRange.maxVariantPrice.amount}
                         </p>
                 </div>
-               </Link>
+         
             ))}
         </div>
     )
