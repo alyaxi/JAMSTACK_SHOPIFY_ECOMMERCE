@@ -12,7 +12,7 @@ const Products = ({data}) =>  {
               
                 <div key={product.shopifyId}>
                     <img src={product.images[0].originalSrc} alt="" />
-                    <Link to={`/${product.shopifyId}`}><h3>{product.title}</h3></Link> 
+                    <Link to={`/${product.handle}`}><h3>{product.title}</h3></Link> 
                     <p>{product.description}</p>
                     <p>
                     <b>Price :</b> {product.priceRange.maxVariantPrice.amount}
@@ -53,6 +53,7 @@ export const query = graphql`
                 sku
                 title
               }
+              handle
             }
           }
         }
