@@ -1,3 +1,7 @@
+require(dotenv).config({
+  path: `.env`
+})
+
 module.exports = {
     siteMetadata: {
         siteUrl: `https://www.yourdomain.tld`,
@@ -7,9 +11,9 @@ module.exports = {
             resolve: `gatsby-source-shopify`,
             options: {
               // The domain name of your Shopify shop.
-              shopName: `alistoretest123`,
+              shopName: process.env.SHOP_NAME,
               // The storefront access token
-              accessToken: `8a857c0404db4c93b0a34822e576a8a1`,
+              accessToken: process.env.ACCESS_TOKEN,
             },
           },
     ]
