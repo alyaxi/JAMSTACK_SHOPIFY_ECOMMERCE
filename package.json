@@ -15,11 +15,15 @@
   },
   "license": "0BSD",
   "dependencies": {
+    "bootstrap": "^5.0.2",
     "dotenv": "^8.2.0",
     "gatsby": "^2.24.63",
     "gatsby-source-shopify": "^3.4.0",
+    "node-sass": "^6.0.1",
     "react": "^16.13.1",
+    "react-bootstrap": "^2.0.0-beta.4",
     "react-dom": "^16.13.1",
+    "sass": "^1.35.2",
     "shopify-buy": "^2.11.0"
   }
 }
