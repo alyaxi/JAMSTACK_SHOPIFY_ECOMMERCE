@@ -2,7 +2,7 @@ import React from "react";
 import { graphql, Link } from "gatsby";
 import Layout from "../components/layout";
 import { Card, Button } from "react-bootstrap";
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 const Products = ({ data }) => {
   console.log(data);
   if (!data && !data.allShopifyProduct) {
