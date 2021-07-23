@@ -14,13 +14,13 @@ export default function Layout({children}) {
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
   <Navbar.Collapse id="responsive-navbar-nav">
     <Nav className="me-auto">
-      <Nav.Link ><Link to="/">Home </Link></Nav.Link>
-      <Nav.Link ><Link to="/products">Products </Link></Nav.Link>
+      <Nav.Link ><Link className="nav" style={{textDecoration: "none"}} to="/">Home </Link></Nav.Link>
+      <Nav.Link ><Link className="nav" style={{textDecoration: "none"}} to="/products">Products </Link></Nav.Link>
     </Nav>
     <Nav>
-     <Nav.Link ><Link to="/cart"> Cart </Link></Nav.Link>
+     <Nav.Link ><Link className="nav" style={{textDecoration: "none"}} to="/cart"> Cart </Link></Nav.Link>
       <Nav.Link >
-        <Link to='/checkout'>Checkout</Link>
+        <Link className="nav" style={{textDecoration: "none"}} to='/checkout'>Checkout</Link>
       </Nav.Link>
     </Nav>
   </Navbar.Collapse>

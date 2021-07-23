@@ -19,7 +19,7 @@ const Products = ({ data }) => {
               <Card style={{ width: "18rem", height: "100%", margin: "10px" }}>
                 <Card.Img variant="top" src={product.images[0].originalSrc} />
                 <Card.Body>
-                  <Link to={`/${product.handle}`} style={{textDecoration:"none", color:"black"}}>
+                  <Link to={`/products/${product.handle}`} style={{textDecoration:"none", color:"black"}}>
                     {" "}
                     <Card.Title>{product.title}</Card.Title>{" "}
                   </Link>
