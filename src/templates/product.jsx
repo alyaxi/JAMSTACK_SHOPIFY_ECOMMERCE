@@ -1,14 +1,15 @@
 import React from 'react'
 import {Link} from "gatsby"
+import Layout from '../components/layout'
 export default function product({pageContext}) {
     const {priceRange : {maxVariantPrice : {amount}}, title, description, images} = pageContext
     return (
-        <div>
+        <Layout>
             <img src={images[0].originalSrc} alt="" />
             <h1>{title}</h1>
             <p>{description}</p>
             <p><b>Price:</b> {amount}</p>
             <Link to="/products">Back</Link>
-        </div>
+        </Layout>
     )
 }

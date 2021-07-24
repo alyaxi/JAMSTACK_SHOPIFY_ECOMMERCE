@@ -1,11 +1,14 @@
 import { Link, navigate } from 'gatsby'
 import React from 'react'
 import "./layout.css"
-import {Navbar, Container, Nav} from "react-bootstrap"
+import {Navbar, Container, Nav, Badge} from "react-bootstrap"
 
 //Created the Layout Component Provider
 
-export default function Layout({children}) {
+export default function Layout({children, totalPrice, currency, quantity}) {
+    console.log("data = ", totalPrice);
+    console.log("data = ", currency);
+    console.log("data = ", quantity);
     return (
        <>
  <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
@@ -18,10 +21,13 @@ export default function Layout({children}) {
       <Nav.Link ><Link className="nav" style={{textDecoration: "none"}} to="/products">Products </Link></Nav.Link>
     </Nav>
     <Nav>
-     <Nav.Link ><Link className="nav" style={{textDecoration: "none"}} to="/cart"> Cart </Link></Nav.Link>
+     <Nav.Link ><Link className="nav" style={{textDecoration: "none"}} to="/cart"> Cart </Link>
+     </Nav.Link>
+     <p><Badge bg='dark' text="light">{quantity}</Badge></p>
       <Nav.Link >
-        <Link className="nav" style={{textDecoration: "none"}} to='/checkout'>Checkout</Link>
+        <Link className="nav" style={{textDecoration: "none"}} to='/checkout'>Checkout {" "} </Link>
       </Nav.Link>
+      <p><Badge bg='dark' text="light"> {currency} {totalPrice && totalPrice.split(".")[0]}</Badge></p>
     </Nav>
   </Navbar.Collapse>
   </Container>
