@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import { graphql, Link } from "gatsby";
 import Layout from "../components/layout";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Container } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Client from "shopify-buy"
 
@@ -34,7 +34,8 @@ const Products = ({ data }) => {
   return (
     <>
       <Layout totalPrice = {checkoutSession && checkoutSession.totalPrice} currency= {checkoutSession && checkoutSession.currencyCode} quantity={checkoutSession && checkoutSession.lineItems.length}>
-        <h2 style={{textAlign:"center"}}>Products</h2>
+      <Container>
+        <h1 >Products</h1>
         <hr />
         <div style={{ display: "flex", flexDirection: "row" }}>
           {data.allShopifyProduct.edges.map(({ node: product }) => (
@@ -76,6 +77,7 @@ const Products = ({ data }) => {
             </div>
           ))}
         </div>
+        </Container>
       </Layout>
     </>
   );
