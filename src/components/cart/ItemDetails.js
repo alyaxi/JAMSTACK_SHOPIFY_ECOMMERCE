@@ -83,12 +83,17 @@ const ItemDetails = ({ lineItems, checkoutSession, setCheckoutSession },  ) => {
 
       <Row style={styles.mediaItemButtons}>
         <Col xs={6}>
-          <Button variant="primary" size="sm">
+          <Button variant="primary" size="sm" >
             Details
           </Button>
         </Col>
         <Col xs={6}>
-          <Button variant="danger" size="sm">
+          <Button variant="danger" size="sm" onClick={async() => {
+            const sessionDelete = await client.checkout.removeLineItems(checkoutSession.id, [
+              id
+            ])
+            setCheckoutSession(sessionDelete)
+          }}>
             Delete
           </Button>
         </Col>
