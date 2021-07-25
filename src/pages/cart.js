@@ -27,6 +27,8 @@ export default function Cart() {
       console.log("session", session);
     })();
   }, []);
+ 
+ 
   return (
     <Layout totalPrice = {checkoutSession && checkoutSession.totalPrice} currency= {checkoutSession && checkoutSession.currencyCode} quantity={checkoutSession && checkoutSession.lineItems.length}>
       <Container>
@@ -43,7 +45,7 @@ export default function Cart() {
         {checkoutSession &&
           checkoutSession.lineItems.map((item) => (
             <div className="purchase-card" >
-                  <ItemDetails lineItems={item} key={item.id}/>
+                  <ItemDetails lineItems={item} key={item.id} checkoutSession={checkoutSession} setCheckoutSession={setCheckoutSession}/>
                 
                   </div>
                   ))}
