@@ -22,7 +22,7 @@ const Products = ({ data }) => {
     })();
   }, []);
 
-  console.log(data);
+  // console.log(data);
   if (!data && !data.allShopifyProduct) {
     return <h1>Loading....</h1>;
   }
@@ -74,7 +74,7 @@ const Products = ({ data }) => {
                           ]
                         );
                         setCheckoutSession(session);
-                        console.log("button ", session);
+                        // console.log("button ", session);
                       }}
                     >
                       Add to Cart
