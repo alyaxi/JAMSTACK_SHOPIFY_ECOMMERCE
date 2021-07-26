@@ -17,7 +17,7 @@ export default function Product({ pageContext }) {
         localStorage.getItem("checkoutID")
       );
       setCheckoutSession(session);
-      console.log("session", session);
+      // console.log("session", session);
     })();
   }, []);
   const {

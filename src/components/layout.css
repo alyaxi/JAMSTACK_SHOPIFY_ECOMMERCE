@@ -1,20 +1,11 @@
-body{
-    padding: 0;
-    margin: 0;
+body {
+  padding: 0;
+  margin: 0;
 }
 
-.nav{
+.nav {
   color: rgb(218, 243, 255);
-
 }
-.nav a{
+.nav a {
   text-decoration: "none";
-  
-
 }
-
-
-  
-
-
-

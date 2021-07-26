@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Layout from '../components/layout'
+import Layout from "../components/layout";
 import Client from "shopify-buy";
 
 const client = Client.buildClient({
@@ -16,15 +16,17 @@ export default function Home() {
         localStorage.getItem("checkoutID")
       );
       setCheckoutSession(session);
-      console.log("session", session);
+      // console.log("session", session);
     })();
   }, []);
   return (
-    <Layout totalPrice = {checkoutSession && checkoutSession.totalPrice} currency= {checkoutSession && checkoutSession.currencyCode} quantity={checkoutSession && checkoutSession.lineItems.length} checkout={checkoutSession && checkoutSession.webUrl} >
-
-    <div>
-    
-    </div>
+    <Layout
+      totalPrice={checkoutSession && checkoutSession.totalPrice}
+      currency={checkoutSession && checkoutSession.currencyCode}
+      quantity={checkoutSession && checkoutSession.lineItems.length}
+      checkout={checkoutSession && checkoutSession.webUrl}
+    >
+      <div></div>
     </Layout>
-  )
+  );
 }
