@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Layout from "../components/layout";
 import Client from "shopify-buy";
 import { Container } from "react-bootstrap";
-
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./../components/style.css"
 import SubTotal from "../components/cart/SubTotal";
@@ -16,6 +15,7 @@ const client = Client.buildClient({
 });
 
 export default function Cart() {
+  
   const [checkoutSession, setCheckoutSession] = useState();
 
   useEffect(() => {
@@ -30,7 +30,7 @@ export default function Cart() {
  
  
   return (
-    <Layout totalPrice = {checkoutSession && checkoutSession.totalPrice} currency= {checkoutSession && checkoutSession.currencyCode} quantity={checkoutSession && checkoutSession.lineItems.length}>
+    <Layout totalPrice = {checkoutSession && checkoutSession.totalPrice} currency= {checkoutSession && checkoutSession.currencyCode} quantity={checkoutSession && checkoutSession.lineItems.length} checkout={checkoutSession && checkoutSession.webUrl} >
       <Container>
         <br />
         <h1>My Cart</h1>
@@ -44,8 +44,8 @@ export default function Cart() {
                   <h3>Item Details</h3>
         {checkoutSession &&
           checkoutSession.lineItems.map((item) => (
-            <div className="purchase-card" >
-                  <ItemDetails lineItems={item} key={item.id} checkoutSession={checkoutSession} setCheckoutSession={setCheckoutSession}/>
+            <div className="purchase-card"  key={item.id}>
+                  <ItemDetails lineItems={item}  checkoutSession={checkoutSession} setCheckoutSession={setCheckoutSession}/>
                 
                   </div>
                   ))}

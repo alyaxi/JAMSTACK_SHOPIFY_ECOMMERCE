@@ -33,8 +33,9 @@ const Products = ({ data }) => {
 
   return (
     <>
-      <Layout totalPrice = {checkoutSession && checkoutSession.totalPrice} currency= {checkoutSession && checkoutSession.currencyCode} quantity={checkoutSession && checkoutSession.lineItems.length}>
+      <Layout totalPrice = {checkoutSession && checkoutSession.totalPrice} currency= {checkoutSession && checkoutSession.currencyCode} quantity={checkoutSession && checkoutSession.lineItems.length} checkout={checkoutSession && checkoutSession.webUrl}>
       <Container>
+        <br />
         <h1 >Products</h1>
         <hr />
         <div style={{ display: "flex", flexDirection: "row" }}>

@@ -1,5 +1,6 @@
-import React, { Component } from "react";
-import { Button, Row, Col, InputGroup, FormControl } from "react-bootstrap";
+import { navigate } from "gatsby";
+import React from "react";
+import { Button, Row, Col, InputGroup} from "react-bootstrap";
 import Client from "shopify-buy";
 
 
@@ -17,11 +18,11 @@ const styles = {
   },
 };
 
-const ItemDetails = ({ lineItems, checkoutSession, setCheckoutSession },  ) => {
-  console.log("checkoutID ", checkoutSession.id);
-  console.log("checkSession", checkoutSession);
-  console.log("lineItem ",lineItems);
-  console.log("Line Item Id", lineItems.id);
+const ItemDetails = ({ lineItems, checkoutSession, setCheckoutSession }) => {
+  // console.log("checkoutID ", checkoutSession.id);
+  // console.log("checkSession", checkoutSession);
+  // console.log("lineItem ",lineItems);
+  // console.log("Line Item Id", lineItems.id);
   const {
     id,
     quantity,
@@ -30,6 +31,7 @@ const ItemDetails = ({ lineItems, checkoutSession, setCheckoutSession },  ) => {
       image: { src },
       price,
       compareAtPrice,
+      product : {handle}
     },
   } = lineItems;
   console.log();
@@ -83,7 +85,9 @@ const ItemDetails = ({ lineItems, checkoutSession, setCheckoutSession },  ) => {
 
       <Row style={styles.mediaItemButtons}>
         <Col xs={6}>
-          <Button variant="primary" size="sm" >
+          <Button variant="primary" size="sm" onClick={() => {
+              navigate(`/products/${handle}`)
+          }} >
             Details
           </Button>
         </Col>
@@ -102,3 +106,5 @@ const ItemDetails = ({ lineItems, checkoutSession, setCheckoutSession },  ) => {
   );
 };
 export default ItemDetails;
+
+
