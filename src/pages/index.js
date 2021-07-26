@@ -26,7 +26,9 @@ export default function Home() {
       quantity={checkoutSession && checkoutSession.lineItems.length}
       checkout={checkoutSession && checkoutSession.webUrl}
     >
-      <div></div>
+      <div>
+        <h1>Home</h1>
+      </div>
     </Layout>
   );
 }
