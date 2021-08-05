@@ -1,0 +1,11 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+
+.nav {
+  color: rgb(218, 243, 255);
+}
+.nav a {
+  text-decoration: "none";
+}
