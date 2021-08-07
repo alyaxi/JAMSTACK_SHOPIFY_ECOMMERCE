@@ -1,12 +1,12 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
 
-export default function TaxFees({ tax }) {
+export default function TaxFees() {
   return (
     <Row>
       <Col xs={6}>Est. taxes and fees (Based on V042)</Col>
       <Col xs={6}>
-        <strong>{tax}</strong>
+        <strong></strong>
       </Col>
     </Row>
   );

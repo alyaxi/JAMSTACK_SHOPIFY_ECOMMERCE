@@ -1,10 +1,9 @@
-import {ApolloClient, HttpLink, InMemoryCache} from "@apollo/client"
+import { ApolloProvider } from "@apollo/client";
+import { client } from "./client";
+import React from 'react'
 
-
-export const client = ApolloClient({
-    link: new HttpLink({
-        uri: "https://syedaliuzzaman.myshopify.com/api/2021-07/graphql",
-        fetch,
-    }),
-    cache: new InMemoryCache()
-})
+export const wrapRootElement = ({element})=>(
+    <ApolloProvider client={client}>
+        {element}
+    </ApolloProvider>
+)

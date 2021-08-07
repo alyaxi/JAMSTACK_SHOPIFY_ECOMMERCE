@@ -1,40 +1,102 @@
 import React, { useEffect, useState } from "react";
-import { graphql, Link } from "gatsby";
+import { gql, useMutation } from "@apollo/client";
+import {Link, graphql} from "gatsby"
 import Layout from "../components/layout";
 import { Card, Button, Container } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Client from "shopify-buy";
 
-const client = Client.buildClient({
-  domain: "syedaliuzzaman.myshopify.com",
-  storefrontAccessToken: "64795be1bac5e99d95ccee395d4301a3",
-});
-
-const Products = ({ data }) => {
-  const [checkoutSession, setCheckoutSession] = useState();
-
-  useEffect(() => {
-    (async () => {
-      const session = await client.checkout.create();
-      // console.log(session);
-      setCheckoutSession(session);
-      localStorage.setItem("checkoutID", session.id);
-    })();
-  }, []);
-
-  // console.log(data);
-  if (!data && !data.allShopifyProduct) {
-    return <h1>Loading....</h1>;
+const createCheckout = gql`
+mutation checkoutCreate($input: CheckoutCreateInput!) {
+  checkoutCreate(input: $input) {
+    checkout {
+      id
+      webUrl
+      lineItems(first: 50){
+        edges{
+          node{
+            id
+            quantity
+            title
+            variant{
+              id
+              weight
+              weightUnit
+              image{
+                originalSrc
+              }
+            }
+            unitPrice{
+              amount
+            }
+          }
+        }
+      }
+    }
+    checkoutUserErrors {
+      code
+      field
+      message
+    }
   }
+}
 
+`
+
+const LineItemAdd = gql`
+mutation checkoutLineItemsAdd($lineItems: [CheckoutLineItemInput!]!, $checkoutId: ID!) {
+  checkoutLineItemsAdd(lineItems: $lineItems, checkoutId: $checkoutId) {
+    checkout {
+      id
+      webUrl
+      currencyCode
+      lineItems(first: 50){
+        edges{
+          node{
+            title
+            quantity
+            unitPrice{
+              amount
+            }
+            variant{
+              image{
+                originalSrc
+              }
+              weight
+              weightUnit
+            }
+          }
+        }
+      }
+      
+    }
+    checkoutUserErrors {
+      code
+      field
+      message
+    }
+  }
+}
+
+`
+const Products = ({data}) => {
+  console.log(data, "data component");
+const [createCheckoutMutataion, {data: checkoutData}] = useMutation(createCheckout);
+
+const [addLineItem , {data: LineitemData}] = useMutation(LineItemAdd)
+
+useEffect(() => {
+  (async() => {
+    const res = await createCheckoutMutataion({
+      variables: {
+        input: {}
+      }
+    })
+    console.log("checkout session created",res);
+  })()
+},[])
   return (
     <>
-      <Layout
-        totalPrice={checkoutSession && checkoutSession.totalPrice}
-        currency={checkoutSession && checkoutSession.currencyCode}
-        quantity={checkoutSession && checkoutSession.lineItems.length}
-        checkout={checkoutSession && checkoutSession.webUrl}
-      >
+      <Layout>
         <Container>
           <br />
           <h1>Products</h1>
@@ -58,38 +120,30 @@ const Products = ({ data }) => {
                       {" "}
                       <b>Price :</b> {product.priceRange.maxVariantPrice.amount}
                     </Card.Subtitle>
-                    {/* <Card.Text>{product.description}</Card.Text> */}
+                    <Card.Text>{product.description}</Card.Text>
                   </Card.Body>
                   <Card.Footer>
                     <Button
                       variant="primary"
-                      onClick={async () => {
-                        const session = await client.checkout.addLineItems(
-                          checkoutSession.id,
-                          [
-                            {
-                              variantId: product.variants[0].id.split("__")[2],
-                              quantity: 1,
-                            },
-                          ]
-                        );
-                        setCheckoutSession(session);
-                        // console.log("button ", session);
+                      onClick={async() => {
+                        const resAdd = await addLineItem({
+                          variables:{
+                            lineItems: [
+                              {
+                                quantity: 1,
+                                variantId: product.variants[0].id.split("__")[2]
+                              }
+                            ],
+                            checkoutId: checkoutData.checkoutCreate.checkout.id
+                          }
+                        })
+                        console.log("Added Lineitem", resAdd);
                       }}
                     >
                       Add to Cart
                     </Button>
                   </Card.Footer>
                 </Card>
-
-                {/* <img src={product.images[0].originalSrc} alt="" />
-              <Link to={`/${product.handle}`}>
-                <h3>{product.title}</h3>
-              </Link>
-              <p>{product.description}</p>
-              <p>
-                <b>Price :</b> {product.priceRange.maxVariantPrice.amount}
-              </p> */}
               </div>
             ))}
           </div>
@@ -104,7 +158,7 @@ export const query = graphql`
   {
     allShopifyProduct {
       edges {
-        node {
+        node { 
           images {
             originalSrc
           }

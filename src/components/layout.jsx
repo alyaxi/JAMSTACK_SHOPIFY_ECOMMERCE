@@ -6,12 +6,7 @@ import { Navbar, Container, Nav, Badge } from "react-bootstrap";
 //Created the Layout Component Provider
 
 export default function Layout({
-  children,
-  totalPrice,
-  currency,
-  quantity,
-  checkout,
-}) {
+  children}) {
   // console.log("data = ", totalPrice);
   // console.log("data = ", currency);
   // console.log("data = ", quantity);
@@ -51,21 +46,17 @@ export default function Layout({
               </Nav.Link>
               <p>
                 <Badge bg="dark" text="light">
-                  {quantity}
+               0
                 </Badge>
               </p>
-              <Nav.Link
-                onClick={() => {
-                  window.open(checkout);
-                }}
-              >
+              <Nav.Link>
                 <Link className="nav" style={{ textDecoration: "none" }} to="">
                   Checkout
                 </Link>
               </Nav.Link>
               <p>
                 <Badge bg="dark" text="light">
-                  {currency} {totalPrice && totalPrice.split(".")[0]}
+                 0
                 </Badge>
               </p>
             </Nav>

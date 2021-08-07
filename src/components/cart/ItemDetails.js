@@ -1,12 +1,7 @@
 import { navigate } from "gatsby";
 import React from "react";
 import { Button, Row, Col, InputGroup } from "react-bootstrap";
-import Client from "shopify-buy";
 
-const client = Client.buildClient({
-  domain: "syedaliuzzaman.myshopify.com",
-  storefrontAccessToken: "64795be1bac5e99d95ccee395d4301a3",
-});
 const styles = {
   mediaItemButtons: {
     paddingTop: "5px",
@@ -15,78 +10,42 @@ const styles = {
   },
 };
 
-const ItemDetails = ({ lineItems, checkoutSession, setCheckoutSession }) => {
+const ItemDetails = () => {
   // console.log("checkoutID ", checkoutSession.id);
   // console.log("checkSession", checkoutSession);
   // console.log("lineItem ",lineItems);
   // console.log("Line Item Id", lineItems.id);
-  const {
-    id,
-    quantity,
-    title,
-    variant: {
-      image: { src },
-      price,
-      compareAtPrice,
-      product: { handle },
-    },
-  } = lineItems;
-  // console.log();
+ 
   return (
     <>
       <img
         width={100}
         height={100}
         className="align-self-center mr-3"
-        src={src}
+        src=""
         alt="Generic placeholder"
       />
 
-      <p>{title}</p>
+      <p></p>
       <Row>
         <Col xs={6}>
           <p>Price: </p>
-          <strong>{price}</strong>
-          <p style={{ textDecoration: "line-through" }}>{compareAtPrice}</p>
+          <strong></strong>
+          <p style={{ textDecoration: "line-through" }}></p>
         </Col>
         <Col xs={6}>
           <p>Quantity: </p>
           <InputGroup size="sm" className="mb-3">
             <InputGroup.Text id="inputGroup-sizing-sm">
-              {quantity}
             </InputGroup.Text>
 
             <Button
               variant="outline-secondary"
-              onClick={async () => {
-                const sessionAdd = await client.checkout.updateLineItems(
-                  checkoutSession.id,
-                  [
-                    {
-                      id: id,
-                      quantity: quantity + 1,
-                    },
-                  ]
-                );
-                setCheckoutSession(sessionAdd);
-              }}
             >
               +
             </Button>
             <Button
               variant="outline-secondary"
-              onClick={async () => {
-                const sessionMinus = await client.checkout.updateLineItems(
-                  checkoutSession.id,
-                  [
-                    {
-                      id: id,
-                      quantity: quantity - 1,
-                    },
-                  ]
-                );
-                setCheckoutSession(sessionMinus);
-              }}
             >
               -
             </Button>
@@ -99,9 +58,6 @@ const ItemDetails = ({ lineItems, checkoutSession, setCheckoutSession }) => {
           <Button
             variant="primary"
             size="sm"
-            onClick={() => {
-              navigate(`/products/${handle}`);
-            }}
           >
             Details
           </Button>
@@ -109,15 +65,7 @@ const ItemDetails = ({ lineItems, checkoutSession, setCheckoutSession }) => {
         <Col xs={6}>
           <Button
             variant="danger"
-            size="sm"
-            onClick={async () => {
-              const sessionDelete = await client.checkout.removeLineItems(
-                checkoutSession.id,
-                [id]
-              );
-              setCheckoutSession(sessionDelete);
-            }}
-          >
+            size="sm">
             Delete
           </Button>
         </Col>

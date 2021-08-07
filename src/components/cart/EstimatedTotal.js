@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
 
-export default function EstimatedTotal({ totalPrice, countryCode }) {
+export default function EstimatedTotal() {
   return (
     <Row>
       <Col xs={6}>
@@ -9,8 +9,7 @@ export default function EstimatedTotal({ totalPrice, countryCode }) {
       </Col>
       <Col xs={6}>
         <h3>
-          <span> {countryCode} </span>
-          {totalPrice}
+          <span> </span>
         </h3>
       </Col>
     </Row>
